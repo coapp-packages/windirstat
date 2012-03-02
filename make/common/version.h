@@ -66,7 +66,7 @@
 // Format: #define blank LINKCOUNT blanks decimal
 // Reset this to zero only when you increment VERNUM_MAJOR/MINOR/REVISION.
 
-#define LINKCOUNT  80
+#define LINKCOUNT  101
 
 //-------------------------------------------------------------------
 // Release candidate number. Relevant for BC_RELEASECANDIDATE.

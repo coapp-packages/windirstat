@@ -68,7 +68,8 @@ void CLayout::OnInitDialog(bool centerWindow)
 	m_dialog->GetWindowRect(rcDialog);
 	m_originalDialogSize= rcDialog.Size();
 
-	for (int i=0; i < m_control.GetSize(); i++)
+	int i;
+	for (i=0; i < m_control.GetSize(); i++)
 	{
 		CRect rc;
 		m_control[i].control->GetWindowRect(rc);
@@ -226,7 +227,7 @@ void CLayout::CSizeGripper::DrawShadowLine(CDC *pdc, CPoint start, CPoint end)
 	}
 }
 
-UINT CLayout::CSizeGripper::OnNcHitTest(CPoint point)
+LRESULT CLayout::CSizeGripper::OnNcHitTest(CPoint point)
 {
 	ScreenToClient(&point);
 

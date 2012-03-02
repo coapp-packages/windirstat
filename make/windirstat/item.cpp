@@ -1210,7 +1210,8 @@ void CItem::UpwardSetUndone()
 {
 	if (GetType() == IT_DRIVE && IsDone() && GetDocument()->OptionShowUnknown())
 	{
-		for (int i=0; i < GetChildrenCount(); i++)
+		int i;
+		for (i=0; i < GetChildrenCount(); i++)
 			if (GetChild(i)->GetType() == IT_UNKNOWN)
 				break;
 		CItem *unknown = GetChild(i);
@@ -1254,7 +1255,8 @@ void CItem::RefreshRecycler()
 		return; // nix zu machen.
 	}
 
-	for (int i=0; i < GetChildrenCount(); i++)
+	int i;
+	for (i=0; i < GetChildrenCount(); i++)
 	{
 		if (GetChild(i)->GetName().CompareNoCase(recycler) == 0)
 			break;
@@ -1538,7 +1540,8 @@ COLORREF CItem::GetPercentageColor() const
 
 int CItem::FindFreeSpaceItemIndex() const
 {
-	for (int i=0; i < GetChildrenCount(); i++)
+	int i;
+	for (i=0; i < GetChildrenCount(); i++)
 	{
 		if (GetChild(i)->GetType() == IT_FREESPACE)
 			break;
@@ -1548,7 +1551,8 @@ int CItem::FindFreeSpaceItemIndex() const
 
 int CItem::FindUnknownItemIndex() const
 {
-	for (int i=0; i < GetChildrenCount(); i++)
+	int i;
+	for (i=0; i < GetChildrenCount(); i++)
 	{
 		if (GetChild(i)->GetType() == IT_UNKNOWN)
 			break;

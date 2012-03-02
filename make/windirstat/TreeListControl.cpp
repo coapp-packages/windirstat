@@ -390,7 +390,8 @@ void CTreeListControl::SelectAndShowItem(const CTreeListItem *item, bool showWho
 	}
 
 	int parent= 0;
-	for (int i=path.GetSize() - 1; i >= 0; i--)
+	int i;
+	for (i=path.GetSize() - 1; i >= 0; i--)
 	{
 		int index= FindTreeItem(path[i]);
 		if (index == -1)

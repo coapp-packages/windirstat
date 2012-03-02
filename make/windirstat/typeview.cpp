@@ -275,7 +275,8 @@ LONGLONG CExtensionListControl::GetRootSize()
 
 void CExtensionListControl::SelectExtension(LPCTSTR ext)
 {
-	for (int i=0; i < GetItemCount(); i++)
+	int i;
+	for (i=0; i < GetItemCount(); i++)
 	{
 		if (GetListItem(i)->GetExtension().CompareNoCase(ext) == 0)
 			break;

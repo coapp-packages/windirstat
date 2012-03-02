@@ -233,7 +233,8 @@ bool CMountPoints::IsVolumeMountPoint(CString volume, CString path)
 		}
 
 		CString point;
-		for (int i=0; i < pva->GetSize(); i++)
+		int i;
+		for (i=0; i < pva->GetSize(); i++)
 		{
 			point= (*pva)[i].point;
 			if (path.Left(point.GetLength()) == point)

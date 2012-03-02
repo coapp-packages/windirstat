@@ -98,7 +98,8 @@ void CSortingListControl::LoadPersistentAttributes()
 	CPersistence::GetColumnOrder(m_name, arr);
 	SetColumnOrderArray(arr.GetSize(), arr.GetData());
 
-	for (int i=0; i < arr.GetSize(); i++)
+	int i;
+	for (i=0; i < arr.GetSize(); i++)
 		arr[i]= GetColumnWidth(i);
 	CPersistence::GetColumnWidths(m_name, arr);
 	for (i=0; i < arr.GetSize(); i++)

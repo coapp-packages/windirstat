@@ -217,7 +217,7 @@ CString CMyImageList::GetADriveSpec()
 
 void CMyImageList::AddCustomImages()
 {
-	const CUSTOM_IMAGE_COUNT = 5;
+	const int CUSTOM_IMAGE_COUNT = 5;
 	const COLORREF bgcolor= RGB(255,255,255);
 
 	int folderImage= GetFolderImage();

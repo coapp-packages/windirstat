@@ -600,7 +600,8 @@ BOOL COwnerDrawnListControl::OnEraseBkgnd(CDC* pDC)
 	HDITEM hdi;
 	ZeroMemory(&hdi, sizeof(hdi));
 	hdi.mask= HDI_WIDTH;
-	for (int i=0; i < GetHeaderCtrl()->GetItemCount(); i++)
+	int i;
+	for (i=0; i < GetHeaderCtrl()->GetItemCount(); i++)
 	{
 		GetHeaderCtrl()->GetItem(columnOrder[i], &hdi);
 		x+= hdi.cxy;

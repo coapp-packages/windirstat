@@ -53,7 +53,7 @@ class CLayout
 
 		DECLARE_MESSAGE_MAP()
 		afx_msg void OnPaint();
-		afx_msg UINT OnNcHitTest(CPoint point);
+		afx_msg LRESULT  OnNcHitTest(CPoint point);
 	};
 
 public:

@@ -700,8 +700,9 @@ double CTreemap::KDirStat_CalcutateNextRow(Item *parent, const int nextChild, do
 	ASSERT(mySize > 0);
 	LONGLONG sizeUsed= 0;
 	double rowHeight= 0;
-
-	for (int i=nextChild; i < parent->TmiGetChildrenCount(); i++)
+	
+	int i;
+	for (i=nextChild; i < parent->TmiGetChildrenCount(); i++)
 	{
 		LONGLONG childSize= parent->TmiGetChild(i)->TmiGetSize();
 		if (childSize == 0)

@@ -182,7 +182,8 @@ CString PadWidthBlanks(CString n, int width)
 	{
 		CString b;
 		LPTSTR psz= b.GetBuffer(blankCount + 1);
-		for (int i=0; i < blankCount; i++)
+		int i;
+		for (i=0; i < blankCount; i++)
 			psz[i]= _T(' ');
 		psz[i]= 0;
 		b.ReleaseBuffer();

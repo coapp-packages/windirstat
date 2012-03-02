@@ -494,7 +494,7 @@ void CGraphView::OnDestroy()
 	CView::OnDestroy();
 }
 
-void CGraphView::OnTimer(UINT /*nIDEvent*/)
+void CGraphView::OnTimer(UINT_PTR /*nIDEvent*/)
 {
 	CPoint point;
 	GetCursorPos(&point);
