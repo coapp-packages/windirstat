@@ -1,0 +1,149 @@
+/* target information */
+@import "version.inc";
+
+#product-info  {
+	product-name: "windirstat";
+	version: "1.1.2.83";
+	original-source-location: "http://iweb.dl.sourceforge.net/project/windirstat/windirstat/1.1.2%20%28the%20setup%20from%20the%20.zip%20files%20is%20NO%20LONGER%20supported%20-%20use%20the%20installer%20instead%29/windirstat1_1_2-src.zip";
+	original-source-website: "http://windirstat.info/";
+	license: "GPL";
+	packager: "Hamish C";
+}
+
+test {
+    default : false;
+    uses: release;
+    build-command: @"
+	   ";
+};
+
+package {
+    
+    default : false;
+    uses : sign;
+    
+    targets: { 
+        @"copkg\windirstat[vc10]-${package-version}-x86.msi",
+        @"copkg\windirstat[vc10]-${package-version}-x64.msi",
+    };
+    
+    build-command : @"
+        REM THERE IS SOME GOOFY STUFF IN HERE TO WORK AROUND A COUPLE BUGS IN AUTOPACKAGE.
+        REM FIXES COMING SOON...
+        cd COPKG
+        coapp add-feed %cd%\
+        coapp --force-scan list 
+        autopackage windirstat[vc10]-x86.autopkg || goto failed
+        coapp --force-scan list 
+        autopackage windirstat[vc10]-x64.autopkg || goto failed
+        coapp --force-scan list 
+        coapp remove-feed %cd%\
+        ptk update-version
+    ";
+
+	clean-command: @"del COPKG\*.msi COPKG\*.wixpdb";
+	
+};
+
+
+update-version {
+    default : false;
+    
+    build-command : @"
+        REM auto-increment version.inc file...
+        
+        cd COPKG
+        setlocal EnableDelayedExpansion
+        for /F ""tokens=4,5,6,7  delims=.; "" %%v in (version.inc) do (
+            set /a build=%%y + 1
+            set VERSTRING=#define { package-version: %%v.%%w.%%x.!build!; }
+        )
+        echo !VERSTRING! > version.inc
+    ";
+}
+
+release {
+    set: BuildCfg="Release";
+    uses: x86;
+    uses: x64;
+};
+
+sign {
+    default : false;
+    uses: release;
+    build-command: @"simplesigner.exe --nologo --sign urelease\x64\**.dll urelease\x64\**.exe urelease\x86\**.dll urelease\x86\**.exe";
+};
+
+
+x86 {
+    default : false;
+    compiler: vc10;
+    platform: x86;
+
+    targets: { 
+		"urelease\x86\wdsr040a.dll",
+		"urelease\x86\wdsr040c.dll",
+		"urelease\x86\wdsr040e.dll",
+		"urelease\x86\wdsr0405.dll",
+		"urelease\x86\wdsr0407.dll",
+		"urelease\x86\wdsr0410.dll",
+		"urelease\x86\wdsr0415.dll",
+		"urelease\x86\wdsr0419.dll",
+		"urelease\x86\windirstat.exe",
+		"urelease\wdsh040e.chm",
+		"urelease\wdsh0407.chm",
+		"urelease\wdsh0415.chm",
+		"urelease\windirstat.chm",
+	};
+	
+    build-command:@"
+		msbuild /p:Platform=win32 /p:Configuration=UnicodeRelease make\windirstat.sln
+	";
+    
+    clean-command:@"
+       FOR /D /R %%X IN (Release) DO RD /S /Q ""%%X"" > nul 2> nul
+       FOR /D /R %%X IN (UnicodeRelease) DO RD /S /Q ""%%X"" > nul 2> nul
+       if exist make\common\x86 rmdir /s /q make\common\x86 > nul 2> nul
+       if exist release rmdir /s /q release > nul 2> nul
+       if exist urelease rmdir /s /q urelease > nul 2> nul
+       if exist ipch rmdir /s /q ipch > nul 2> nul
+       rem del /Q /A make\windirstat\windirstat.aps make\windirstat\windirstat.txt > nul 2> nul
+       del /S /Q /A - *.sdf *.suo *.user > nul 2>NUL
+    ";
+};
+
+x64 {
+    default : false;
+    compiler: vc10;
+    platform: x64;
+
+    targets: { 
+		"urelease\x64\wdsr040a.dll",
+		"urelease\x64\wdsr040c.dll",
+		"urelease\x64\wdsr040e.dll",
+		"urelease\x64\wdsr0405.dll",
+		"urelease\x64\wdsr0407.dll",
+		"urelease\x64\wdsr0410.dll",
+		"urelease\x64\wdsr0415.dll",
+		"urelease\x64\wdsr0419.dll",
+		"urelease\x64\windirstat.exe",
+		"urelease\wdsh040e.chm",
+		"urelease\wdsh0407.chm",
+		"urelease\wdsh0415.chm",
+		"urelease\windirstat.chm",
+	};
+	
+    build-command:@"
+        msbuild /p:Platform=x64 /p:Configuration=UnicodeRelease make\windirstat.sln
+    ";
+    clean-command:@"
+       FOR /D /R %%X IN (Release) DO RD /S /Q ""%%X"" > nul 2> nul
+       FOR /D /R %%X IN (UnicodeRelease) DO RD /S /Q ""%%X"" > nul 2> nul
+       if exist make\common\x64 rmdir /s /q make\common\x64 > nul 2> nul
+       if exist release rmdir /s /q release > nul 2> nul
+       if exist urelease rmdir /s /q urelease > nul 2> nul
+       if exist ipch rmdir /s /q ipch > nul 2> nul
+       rem del /Q /Q make\windirstat\windirstat.aps make\windirstat\windirstat.txt > nul 2> nul
+       del /S /Q /A - *.sdf *.suo *.user > nul 2>NUL
+    ";
+};

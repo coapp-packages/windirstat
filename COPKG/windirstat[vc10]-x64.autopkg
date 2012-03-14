@@ -1,0 +1,8 @@
+// details for x64 version of windirstat package
+// build with: autopackage x64.autopkg windirstat.autopkg  
+@import "windirstat.inc";
+
+#define { 
+    flavor: "vc10"; 
+    arch : "x64";
+}

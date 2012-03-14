@@ -1,0 +1,8 @@
+// details for x86 version of windirstat package
+// build with: autopackage x86.autopkg windirstat.autopkg  
+@import "windirstat.inc";
+
+#define { 
+    flavor: "vc10"; 
+    arch : "x86";
+}
