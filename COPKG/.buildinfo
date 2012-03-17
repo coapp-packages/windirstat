@@ -107,6 +107,7 @@ x86 {
        if exist release rmdir /s /q release > nul 2> nul
        if exist urelease rmdir /s /q urelease > nul 2> nul
        if exist ipch rmdir /s /q ipch > nul 2> nul
+       if exist make\ipch rmdir /s /q make\ipch > nul 2> nul
        rem del /Q /A make\windirstat\windirstat.aps make\windirstat\windirstat.txt > nul 2> nul
        del /S /Q /A - *.sdf *.suo *.user > nul 2>NUL
     ";
@@ -143,6 +144,7 @@ x64 {
        if exist release rmdir /s /q release > nul 2> nul
        if exist urelease rmdir /s /q urelease > nul 2> nul
        if exist ipch rmdir /s /q ipch > nul 2> nul
+       if exist make\ipch rmdir /s /q make\ipch > nul 2> nul
        rem del /Q /Q make\windirstat\windirstat.aps make\windirstat\windirstat.txt > nul 2> nul
        del /S /Q /A - *.sdf *.suo *.user > nul 2>NUL
     ";
